@@ -22,7 +22,8 @@
   "dependencies": {
     "request": "~2.33.0",
     "lodash": "~2.4.1",
-    "async": "~0.2.10"
+    "async": "~0.2.10",
+    "couchdb_bulkdoc_saver": "git://github.com/jmarca/couchdb_bulkdoc_saver.git"
   },
   "devDependencies": {
     "should": "~3.1.2"
