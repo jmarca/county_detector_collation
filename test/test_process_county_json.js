@@ -13,7 +13,7 @@ var test_year = 2007
 describe('process county json',function(){
     it('should process ventura county, 2007',function(done){
         fs.readFile('test/files/'+test_name+'.json'
-                   ,{'encodingo':'utf8'}
+                   ,{'encoding':'utf8'}
                    ,function(e,blob){
                     process_doc(blob,function(e,l){
                         _.each(l,function(detector){

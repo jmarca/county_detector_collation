@@ -42,7 +42,7 @@ describe('save county detectors',function(){
                    }
         task.config=config
         fs.readFile('test/files/'+test_name+'.json'
-                   ,{'encodingo':'utf8'}
+                   ,{'encoding':'utf8'}
                    ,function(e,blob){
                         process_doc(blob,function(e,l){
                             // save the list
