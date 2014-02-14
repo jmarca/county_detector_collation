@@ -25,9 +25,9 @@ function sha256 (str) {
 describe('get county json',function(){
     it('should get ventura county, 2007',function(done){
         get_doc({'areatype':test_type
-                           ,'areaname':test_name
-                           ,'year':test_year
-                           }
+                ,'areaname':test_name
+                ,'year':test_year
+                }
                ,function(e,blob){
                     md5(blob).should.equal(expected.md5sum)
                     sha256(blob).should.equal(expected.sha256sum)
