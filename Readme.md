@@ -3,6 +3,11 @@
 
   Collate all detectors in highways in a county, move to couchdb
 
+  When you're done, you can get stuff by hitting the URL
+
+      http://127.0.0.1:5984/calvad%2Fcounty%2Fdetectors/_design/detectors/_view/fips_year?key=%5b%2206111%22,2007%5d&reduce=false
+
+
 ## Installation
 
   Install with npm
