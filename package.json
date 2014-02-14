@@ -1,0 +1,28 @@
+{
+  "name": "county_detector_collation",
+  "version": "0.0.1",
+  "description": "Collate all detectors in highways in a county, move to couchdb",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jmarca/county_detector_collation"
+  },
+  "keywords": [
+    "calvad"
+  ],
+  "author": "James E. Marca",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jmarca/county_detector_collation/issues"
+  },
+  "homepage": "https://github.com/jmarca/county_detector_collation",
+  "dependencies": {
+    "request": "~2.33.0"
+  },
+  "devDependencies": {
+    "should": "~3.1.2"
+  }
+}
