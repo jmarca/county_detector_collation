@@ -20,12 +20,15 @@
   },
   "homepage": "https://github.com/jmarca/county_detector_collation",
   "dependencies": {
-    "request": "~2.33.0",
-    "lodash": "~2.4.1",
-    "async": "~0.2.10",
-    "couchdb_bulkdoc_saver": "git://github.com/jmarca/couchdb_bulkdoc_saver.git"
+    "request": "",
+    "superagent":"",
+    "lodash": "",
+    "async": "",
+    "geom_utils":"git://github.com/jmarca/geom_utils",
+    "couchdb_toQuery":"git://github.com/jmarca/couchdb_toQuery",
+    "couchdb_bulkdoc_saver": "git://github.com/jmarca/couchdb_bulkdoc_saver"
   },
   "devDependencies": {
-    "should": "~3.1.2"
+    "should": ""
   }
 }
