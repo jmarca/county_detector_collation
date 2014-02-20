@@ -1,4 +1,4 @@
-/*global require before after describe it */
+/*global require before after describe it emit */
 
 
 var should = require('should')
@@ -11,6 +11,7 @@ var config_okay = require('../lib/config_okay')
 var process_doc = require('../lib/process_county_json')
 
 var save_detectors = require('../lib/save_county_detectors')
+var county_detectors_service  = require('../lib/county_detectors_service')
 
 var config={}
 var utils = require('./utils')
@@ -18,9 +19,11 @@ var task
 var test_type ='counties'
 var test_name = '06111.all' // Ventura
 var test_year = 2007
+var viewer = require('couchdb_put_view')
+var config_file = 'test.config.json'
 
 before(function(done){
-    config_okay('test.config.json',function(err,c){
+    config_okay(config_file,function(err,c){
         config.couchdb =_.clone(c.couchdb,true)
         var date = new Date()
         var test_db_unique = date.getHours()+'-'
@@ -35,34 +38,6 @@ before(function(done){
 
 function load_data(config){
     return function(done){
-        return done('not yet implemented')
-    }
-}
-function make_view(config){
-    return function(done){
-        return done('not yet implemented')
-    }
-}
-function launch_server(config){
-    return function(done){
-        return done('not yet implemented')
-    }
-}
-describe('save county detectors',function(){
-    before(function(done){
-        // set up the fake couchdb, populate with data, launch the server
-        async.series([utils.demo_db_before(config)
-                     ,load_data(config)
-                     ,make_view(config)
-                     ,launch_server(config)
-                     ]
-                    ,done)
-        return null
-    })
-
-    after(utils.demo_db_after(config))
-    it('should save grab detector data for ventura, 2007',function(done){
-        // first load up the data
         var task = {'areatype':test_type
                    ,'areaname':test_name
                    ,'year':test_year
@@ -80,10 +55,115 @@ describe('save county detectors',function(){
                                     row.should.have.keys(['ok','id','rev'])
                                     row.ok.should.be.ok
                                     row.id.should.match(/^06\d\d\d_2007_(7\d{5}|wim\.\d+\.[NSEW])/)
-                                })
-                                done()
+                                });
+                                return done()
                             });
                         });
                     });
+        return null
+    }
+}
+
+function collater(doc) {
+    var m = new RegExp(
+        "^(06\\d{3})_(\\d{4})"
+    );
+    var match = m.exec(doc._id);
+    emit([match[1],+match[2]], doc.detector);
+}
+
+
+function make_view(config){
+    var ddoc = {
+        _id:'_design/'+config.couchdb.design,
+        language:"javascript",
+        views: {}
+    }
+    ddoc.views[config.couchdb.view]={
+        'map':collater,
+        'reduce':'_count'
+    }
+
+    return function(done){
+        viewer({'db':config.couchdb.detector_db
+               ,'user':config.couchdb.auth.username
+               ,'pass':config.couchdb.auth.password
+               ,'doc':ddoc
+               },done)
+        return null
+    }
+}
+
+var app,server
+var env = process.env;
+var testhost = env.TEST_HOST || '127.0.0.1'
+var testport = env.TEST_PORT || 3000
+var express = require('express')
+var http=require('http')
+testport += 3
+
+function launch_server(config){
+    return function(done){
+        app = express()
+              //.use(express.logger())
+              //.use(express.errorHandler({ dumpExceptions: true, showStack: true }))
+        county_detectors_service(app,'/county/detectors',config)
+        server=http
+               .createServer(app)
+               .listen(testport,testhost,function(){
+                   //console.log('test server up on '+testhost+":"+testport)
+                   return done()
+               })
+        return null
+    }
+}
+
+after(function(done){
+    if(server){
+        return server.close(done)
+    }else{
+        return done()
+    }
+})
+
+var request = require('request')
+
+describe('save county detectors',function(){
+    before(function(done){
+        // set up the fake couchdb, populate with data, launch the server
+        async.series([utils.demo_db_before(config)
+                     ,load_data(config)
+                     ,make_view(config)
+                     ,launch_server(config)
+                     ]
+                    ,done)
+        return null
+    })
+
+    after(utils.demo_db_after(config))
+
+    it('should save grab detector data for ventura, 2007',function(done){
+        request.get('http://'+testhost+':'+testport
+                   +'/county/detectors/ventura/2007.json'
+                   ,function(e,r,b){
+                        should.not.exist(e)
+                        var d = JSON.parse(b)
+                        d.should.have.keys('total_rows','rows','offset')
+                        d.rows.should.have.lengthOf(68)
+                        return done()
+                    })
+
+    })
+    it('should save grab detector data for 06111, 2007',function(done){
+        request.get('http://'+testhost+':'+testport
+                   +'/county/detectors/06111/2007.json'
+                   ,function(e,r,b){
+                        should.not.exist(e)
+                        var d = JSON.parse(b)
+                        d.should.have.keys('total_rows','rows','offset')
+                        d.rows.should.have.lengthOf(68)
+                        return done()
+                    })
+
     })
 })
