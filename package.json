@@ -2,7 +2,7 @@
   "name": "county_detector_collation",
   "version": "0.0.1",
   "description": "Collate all detectors in highways in a county, move to couchdb",
-  "main": "app.js",
+  "main": "lib/county_detectors_service.js",
   "scripts": {
     "test": "mocha"
   },

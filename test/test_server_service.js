@@ -140,7 +140,7 @@ describe('save county detectors',function(){
         return null
     })
 
-    after(utils.demo_db_after(config))
+    //after(utils.demo_db_after(config))
 
     it('should save grab detector data for ventura, 2007',function(done){
         request.get('http://'+testhost+':'+testport
