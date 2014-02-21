@@ -20,8 +20,10 @@ var test_type ='counties'
 var test_name = '06111.all' // Ventura
 var test_year = 2007
 var viewer = require('couchdb_put_view')
-var config_file = 'test.config.json'
-
+var path = require('path')
+var rootdir = path.normalize(__dirname)
+var config_file = rootdir+'/'+'../test.config.json'
+console.log(config_file)
 before(function(done){
     config_okay(config_file,function(err,c){
         config.couchdb =_.clone(c.couchdb,true)
