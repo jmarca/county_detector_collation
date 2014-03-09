@@ -15,7 +15,7 @@ var process_doc = require('./lib/process_county_json')
 var save_detectors = require('./lib/save_county_detectors')
 
 var config={}
-var config_okay = require('./lib/config_okay')
+var config_okay = require('config_okay')
 
 function process(config){
 

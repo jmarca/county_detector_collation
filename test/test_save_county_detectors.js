@@ -6,7 +6,7 @@ var fs = require('fs')
 
 var _ = require('lodash')
 
-var config_okay = require('../lib/config_okay')
+var config_okay = require('config_okay')
 var process_doc = require('../lib/process_county_json')
 
 var save_detectors = require('../lib/save_county_detectors')

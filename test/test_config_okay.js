@@ -6,7 +6,7 @@ var async = require('async')
 var _ = require('lodash')
 var fs = require('fs')
 
-var config_okay = require('../lib/config_okay')
+var config_okay = require('config_okay')
 
 describe('config_okay',function(){
     var options;

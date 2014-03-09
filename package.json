@@ -29,7 +29,8 @@
     "couchdb_put_view": "git://github.com/jmarca/couchdb_put_view",
     "couchdb_bulkdoc_saver": "git://github.com/jmarca/couchdb_bulkdoc_saver",
     "express": "~3.4.8",
-      "validation":"git://github.com/jmarca/validation.git"
+    "validation": "git://github.com/jmarca/validation.git",
+    "config_okay": "0.0.2"
   },
   "devDependencies": {
     "should": ""
