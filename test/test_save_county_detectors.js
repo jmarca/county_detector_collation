@@ -17,9 +17,16 @@ var task
 var test_type ='counties'
 var test_name = '06111.all' // Ventura
 var test_year = 2007
+var path    = require('path')
+var rootdir = path.normalize(__dirname)
+var config_file = rootdir+'/../test.config.json'
+
 
 before(function(done){
-    config_okay('test.config.json',function(err,c){
+    config_okay(config_file,function(err,c){
+        console.log(err)
+        console.log(c)
+        if(err) throw new Error(err)
         config.couchdb =_.clone(c.couchdb,true)
         var date = new Date()
         var test_db_unique = date.getHours()+'-'
