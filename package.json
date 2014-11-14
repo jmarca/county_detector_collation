@@ -25,7 +25,7 @@
     "couchdb_bulkdoc_saver": "git://github.com/jmarca/couchdb_bulkdoc_saver",
     "couchdb_put_view": "git://github.com/jmarca/couchdb_put_view",
     "couchdb_toQuery": "git://github.com/jmarca/couchdb_toQuery",
-    "detector_postgis_query": "~0.2.0",
+    "detector_postgis_query": "git://github.com/jmarca/detector_postgis_query",
     "express": "~3.4.8",
     "geom_utils": "git://github.com/jmarca/geom_utils",
     "lodash": "",
