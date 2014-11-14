@@ -4,7 +4,9 @@ var should = require('should')
 var superagent = require('superagent')
 var crypto = require('crypto')
 
-var get_doc = require('../lib/get_county_json')
+var get_county_json  = require('../lib/get_county_json')
+var get_doc=get_county_json.get_doc
+
 
 var test_type ='counties'
 var test_name = '06111.all' // Ventura
@@ -21,6 +23,15 @@ function sha256 (str) {
   return crypto.createHash('sha256').update(str).digest('hex')
 }
 
+var path = require('path')
+var rootdir = path.normalize(__dirname)
+var config_file = rootdir+'/../test.config.json'
+
+console.log(config_file)
+before(function(done){
+    get_county_json.configure(config_file,done)
+    return null
+})
 
 describe('get county json',function(){
     it('should get ventura county, 2007',function(done){

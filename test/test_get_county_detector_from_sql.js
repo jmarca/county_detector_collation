@@ -22,11 +22,7 @@ var config_file = rootdir+'/../test.config.json'
 
 console.log(config_file)
 before(function(done){
-    config_okay(config_file,function(err,c){
-        config = c
-        get_records.configure(config)
-        return done()
-    })
+    get_records.configure(config_file,done)
     return null
 })
 
