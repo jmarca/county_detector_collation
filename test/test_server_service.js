@@ -23,7 +23,7 @@ var viewer = require('couchdb_put_view')
 var path    = require('path')
 var rootdir = path.normalize(__dirname)
 var config_file = rootdir+'/../test.config.json'
-console.log(config_file)
+
 before(function(done){
     config_okay(config_file,function(err,c){
         config.couchdb =_.clone(c.couchdb,true)
@@ -90,6 +90,8 @@ function make_view(config){
         viewer({'db':config.couchdb.detector_db
                ,'user':config.couchdb.auth.username
                ,'pass':config.couchdb.auth.password
+               ,'host':config.couchdb.host || '127.0.0.1'
+               ,'port':config.couchdb.port || 5984
                ,'doc':ddoc
                },done)
         return null
