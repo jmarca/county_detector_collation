@@ -6,7 +6,7 @@ var should = require('should')
 
 function create_tempdb(config,cb){
     var cdb =
-        [config.couchdb.url+':'+config.couchdb.port
+        ['http://'+config.couchdb.host+':'+config.couchdb.port
         ,config.couchdb.db].join('/')
     request.put(cdb
                ,{

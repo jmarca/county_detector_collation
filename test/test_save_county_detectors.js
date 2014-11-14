@@ -51,8 +51,11 @@ describe('save county detectors',function(){
         fs.readFile('test/files/'+test_name+'.json'
                    ,{'encoding':'utf8'}
                    ,function(e,blob){
+                        if(e) throw new Error(e)
+                        console.log("process the blob")
                         process_doc(blob,function(e,l){
                             // save the list
+                            console.log("save the list")
                             save_detectors(task,l,function(e,r){
                                 should.not.exist(e)
                                 r.should.have.lengthOf(68)
