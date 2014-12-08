@@ -32,7 +32,7 @@ before(function(done){
                            + date.getMinutes()+'-'
                            + date.getSeconds()+'-'
                            + date.getMilliseconds()
-        config.couchdb.detector_db += test_db_unique
+        config.couchdb.county_detector_collation_db += test_db_unique
         return done()
     })
     return null
@@ -87,7 +87,7 @@ function make_view(config){
     }
 
     return function(done){
-        viewer({'db':config.couchdb.detector_db
+        viewer({'db':config.couchdb.county_detector_collation_db
                ,'user':config.couchdb.auth.username
                ,'pass':config.couchdb.auth.password
                ,'host':config.couchdb.host || '127.0.0.1'
@@ -146,7 +146,7 @@ describe('save county detectors',function(){
 
     //after(utils.demo_db_after(config))
 
-    it('should save grab detector data for ventura, 2007',function(done){
+    it('should grab detector data for ventura, 2007',function(done){
         request.get('http://'+testhost+':'+testport
                    +'/county/detectors/ventura/2007.json'
                    ,function(e,r,b){
@@ -158,7 +158,7 @@ describe('save county detectors',function(){
                     })
 
     })
-    it('should save grab detector data for 06111, 2007',function(done){
+    it('should grab detector data for 06111, 2007',function(done){
         request.get('http://'+testhost+':'+testport
                    +'/county/detectors/06111/2007.json'
                    ,function(e,r,b){

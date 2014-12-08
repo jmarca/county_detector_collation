@@ -26,7 +26,7 @@ function create_tempdb(config,cb){
 function demo_db_before(config){
     return function(done){
         // dummy up a done grid and a not done grid in a test db
-        var dbs = [config.couchdb.detector_db
+        var dbs = [config.couchdb.county_detector_collation_db
                   ]
 
         async.each(dbs
@@ -44,7 +44,7 @@ function demo_db_before(config){
 function demo_db_after(config){
     return  function(done){
 
-        var dbs = [config.couchdb.detector_db
+        var dbs = [config.couchdb.county_detector_collation_db
                   ]
 
         async.each(dbs
