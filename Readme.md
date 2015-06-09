@@ -1,4 +1,3 @@
-
 # county_detector_collation
 
   Collate all detectors in highways in a county, move to couchdb
@@ -7,6 +6,13 @@
 
       http://127.0.0.1:5984/calvad%2Fcounty%2Fdetectors/_design/detectors/_view/fips_year?key=%5b%2206111%22,2007%5d&reduce=false
 
+
+# Notes June 2015
+
+On quick review, this repo has code that hits the file-system cache on
+lysithia and dumps docs to couchdb, so that they are more portable,
+etc etc.  It doesn't appear to have anything to do with the CalVAD
+imputation sequence.
 
 ## Installation
 
