@@ -27,7 +27,6 @@ var path = require('path')
 var rootdir = path.normalize(__dirname)
 var config_file = rootdir+'/../test.config.json'
 
-console.log(config_file)
 before(function(done){
     get_county_json.configure(config_file,done)
     return null

@@ -26,15 +26,16 @@
     "couchdb_put_view": "git://github.com/jmarca/couchdb_put_view",
     "couchdb_toQuery": "git://github.com/jmarca/couchdb_toQuery",
     "detector_postgis_query": "git://github.com/jmarca/detector_postgis_query",
-    "express": "~3.4.8",
     "geom_utils": "git://github.com/jmarca/geom_utils",
     "lodash": "",
-    "pg": "~2.11.1",
+    "pg": "^6.1.0",
     "request": "",
     "superagent": "",
     "validation": "git://github.com/jmarca/validation.git"
   },
   "devDependencies": {
+    "express": "^4.14.0",
+    "mocha": "^3.1.2",
     "should": ""
   }
 }

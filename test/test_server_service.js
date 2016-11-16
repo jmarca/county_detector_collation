@@ -54,7 +54,7 @@ function load_data(config){
                                 should.not.exist(e)
                                 r.should.have.lengthOf(68)
                                 _.each(r,function(row){
-                                    row.should.have.keys(['ok','id','rev'])
+                                    row.should.have.keys('ok','id','rev')
                                     row.ok.should.be.ok
                                     row.id.should.match(/^06\d\d\d_2007_(7\d{5}|wim\.\d+\.[NSEW])/)
                                 });
@@ -88,8 +88,7 @@ function make_view(config){
 
     return function(done){
         viewer({'db':config.couchdb.county_detector_collation_db
-               ,'user':config.couchdb.auth.username
-               ,'pass':config.couchdb.auth.password
+               ,'auth':config.couchdb.auth
                ,'host':config.couchdb.host || '127.0.0.1'
                ,'port':config.couchdb.port || 5984
                ,'doc':ddoc
@@ -109,8 +108,6 @@ testport += 3
 function launch_server(config){
     return function(done){
         app = express()
-              //.use(express.logger())
-              //.use(express.errorHandler({ dumpExceptions: true, showStack: true }))
         county_detectors_service(app,'/county/detectors',config)
         server=http
                .createServer(app)

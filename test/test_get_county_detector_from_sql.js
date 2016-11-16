@@ -20,7 +20,6 @@ var path = require('path')
 var rootdir = path.normalize(__dirname)
 var config_file = rootdir+'/../test.config.json'
 
-console.log(config_file)
 before(function(done){
     get_records.configure(config_file,done)
     return null
@@ -28,36 +27,36 @@ before(function(done){
 
 describe('get county detectors list',function(){
 
-    it('should grab detector data for kern, 2007',function(done){
-        get_records.query(test_name,2007,function(e,r){
+    it('should grab detector data for kern, 2012',function(done){
+        get_records.query(test_name,2012,function(e,r){
             should.not.exist(e)
             should.exist(r)
-            r.should.have.lengthOf(4)
+            r.should.have.lengthOf(1178)
             done()
         })
     })
-    it('should grab detector data for kern, 2008',function(done){
-        get_records.query(test_name,2008,function(e,r){
-            should.not.exist(e)
-            should.exist(r)
-            r.should.have.lengthOf(4)
-            done()
-        })
-    })
-    it('should grab detector data for kern, 2009',function(done){
-        get_records.query(test_name,2009,function(e,r){
-            should.not.exist(e)
-            should.exist(r)
-            r.should.have.lengthOf(4)
-            done()
-        })
-    })
-    it('should grab detector data for kern, 2009',function(done){
-        get_records.query(test_name,2010,function(e,r){
-            should.not.exist(e)
-            should.exist(r)
-            r.should.have.lengthOf(4)
-            done()
-        })
-    })
+    // it('should grab detector data for kern, 2008',function(done){
+    //     get_records.query(test_name,2008,function(e,r){
+    //         should.not.exist(e)
+    //         should.exist(r)
+    //         r.should.have.lengthOf(4)
+    //         done()
+    //     })
+    // })
+    // it('should grab detector data for kern, 2009',function(done){
+    //     get_records.query(test_name,2009,function(e,r){
+    //         should.not.exist(e)
+    //         should.exist(r)
+    //         r.should.have.lengthOf(4)
+    //         done()
+    //     })
+    // })
+    // it('should grab detector data for kern, 2009',function(done){
+    //     get_records.query(test_name,2010,function(e,r){
+    //         should.not.exist(e)
+    //         should.exist(r)
+    //         r.should.have.lengthOf(4)
+    //         done()
+    //     })
+    // })
 })

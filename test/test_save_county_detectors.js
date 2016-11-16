@@ -24,8 +24,6 @@ var config_file = rootdir+'/../test.config.json'
 
 before(function(done){
     config_okay(config_file,function(err,c){
-        console.log(err)
-        console.log(c)
         if(err) throw new Error(err)
         config.couchdb =_.clone(c.couchdb,true)
         var date = new Date()
@@ -52,15 +50,15 @@ describe('save county detectors',function(){
                    ,{'encoding':'utf8'}
                    ,function(e,blob){
                         if(e) throw new Error(e)
-                        console.log("process the blob")
+                        //console.log("process the blob")
                         process_doc(blob,function(e,l){
                             // save the list
-                            console.log("save the list")
+                            //console.log("save the list")
                             save_detectors(task,l,function(e,r){
                                 should.not.exist(e)
                                 r.should.have.lengthOf(68)
                                 _.each(r,function(row){
-                                    row.should.have.keys(['ok','id','rev'])
+                                    row.should.have.keys('ok','id','rev')
                                     row.ok.should.be.ok
                                     row.id.should.match(/^06\d\d\d_2007_(7\d{5}|wim\.\d+\.[NSEW])/)
                                 })
